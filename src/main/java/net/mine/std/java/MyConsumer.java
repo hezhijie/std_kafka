@@ -16,13 +16,13 @@ import com.google.gson.Gson;
 public class MyConsumer {
 
 	private static final Logger logger = LoggerFactory.getLogger(MyConsumer.class);
-	private final String TOPIC = "mine_mine";
+	private final String TOPIC = "mine_topic";
 	
 	public void execute(String groupid){
 		Properties props = new Properties();
-        props.put("bootstrap.servers", "127.0.0.1:9092");
+        props.put("bootstrap.servers", "127.0.0.1:9092,127.0.0.1:9093");
         props.put("group.id", groupid);
-        props.put("auto.offset.reset", "earliest");
+//        props.put("auto.offset.reset", "earliest");
         props.put("enable.auto.commit", "true");
         props.put("auto.commit.interval.ms", "1000");
         props.put("session.timeout.ms", "30000");
@@ -36,11 +36,10 @@ public class MyConsumer {
         consumer.subscribe(topicList);
         
         while(true){
-        	ConsumerRecords<String, String> records = consumer.poll(100);
+        	ConsumerRecords<String, String> records = consumer.poll(Long.MAX_VALUE);
         	for(ConsumerRecord<String,String> record : records){
-        		
         		Gson gson=new Gson();
-        		logger.info("thread > "+Thread.currentThread().getName() +" ,groupid >" +groupid+"  ,record > " + gson.toJson(record));
+        		logger.info("thread > "+Thread.currentThread().getName() +" , groupid >" +groupid+"  , record > " + gson.toJson(record.key()));
         	}
         }
 	}
@@ -49,18 +48,18 @@ public class MyConsumer {
 		final MyConsumer c = new MyConsumer();
 		final MyConsumer c2 = new MyConsumer();
 		
-		new Thread("t1"){
+		new Thread("cons1"){
 			public void run(){
-				c.execute("g1-1-1");
+				c.execute("con");
 			}
 		}.start();
 		
 		
 		Thread.sleep(1000*2);
-		
-		new Thread("t2"){
+//		
+		new Thread("cons2"){
 			public void run(){
-				c2.execute("g2-2-2");
+				c2.execute("con");
 			}
 		}.start();
 	}

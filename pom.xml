@@ -7,33 +7,60 @@
 
 
 	<properties>
+		<build.file.encoding>UTF-8</build.file.encoding>
 		<!-- <kafkf.version>0.8.2.2</kafkf.version> -->
 		<kafkf.version>0.9.0.1</kafkf.version>
+		<spring.version>3.1.0.RELEASE</spring.version>
 	</properties>
 
 	<dependencies>
+
+		<!-- <dependency>
+			<groupId>org.apache.curator</groupId>
+			<artifactId>curator-framework</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.curator</groupId>
+			<artifactId>curator-examples</artifactId>
+			<version>3.2.0</version>
+		</dependency> -->
+
+		<!-- kafka -->
 		<dependency>
 			<groupId>org.apache.kafka</groupId>
 			<artifactId>kafka_2.10</artifactId>
 			<version>${kafkf.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>1.1.39</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>2.2.2</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.5.8</version>
 		</dependency>
+
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- storm -->
+		<dependency>
+			<groupId>com.alibaba.jstorm</groupId>
+			<artifactId>jstorm-core</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+
 	</dependencies>
 </project>
