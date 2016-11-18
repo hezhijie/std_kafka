@@ -2,7 +2,7 @@ package net.mine.std.struct.linked;
 
 
 /**
- * 简单链表队列
+ * 简单链表队列   未考虑线程安全,只做练习队列的写法
  * 
  * @author user
  *
